@@ -12,7 +12,7 @@ RUN usermod -u 1000 www-data
 RUN chown -R www-data:www-data /var/www
 
 
-COPY ./.docker/entrypoint.sh /
+COPY ./docker_config/entrypoint.sh /
 
 RUN chmod +x /entrypoint.sh
 

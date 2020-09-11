@@ -1,0 +1,6 @@
+/docker_config/dbdata
+/vendor
+/node_modules
+.env
+.idea
+.*.swp
