@@ -7,14 +7,15 @@ use App\Report;
 
 class Store
 {
-    public function handle ($request): Report
+    public function handle ($request, array $violences): Report
     {
         $report = Report::create([
             'description' => request()->description,
             'date' => request()->date,
-            'user_id' => request()->user_id,
+            'user_id' => auth()->id(),
         ]);
 
+        $report->violences()->sync($violences);
 
         return $report;
     }

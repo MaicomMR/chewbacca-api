@@ -22,10 +22,6 @@ class StoreReport extends FormRequest
             'date' => [
                 'required',
                 'date'
-            ],
-            'user_id' => [
-                'required',
-                'exists:users,id'
             ]
         ];
     }

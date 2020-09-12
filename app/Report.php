@@ -10,6 +10,8 @@ class Report extends Model
         'description', 'date', 'user_id'
     ];
 
+    protected $hidden = ['pivot'];
+
     public function violences()
     {
         return $this->belongsToMany('App\Violence');

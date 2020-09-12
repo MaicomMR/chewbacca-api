@@ -10,6 +10,8 @@ class Violence extends Model
         'name', 'slug', 'description', 'media_link'
     ];
 
+    protected $hidden = ['pivot'];
+
     public function reports()
     {
         return $this->belongsToMany('App\Report');
