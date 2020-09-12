@@ -21,6 +21,7 @@ class ReportController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Report::class);
         return ReportResource::collection(Report::paginate(config('paginate.DEFAULT_PAGINATE')));
     }
 
@@ -33,6 +34,8 @@ class ReportController extends Controller
     public function store(StoreReport $request, Store $storeService)
     {
         try {
+            $this->authorize('create', Report::class);
+
             $report = $storeService->handle($request);
 
 			return (new ReportResource($report))
@@ -57,6 +60,7 @@ class ReportController extends Controller
      */
     public function show(Report $report)
     {
+        $this->authorize('view', $report);
         return new ReportResource($report);
     }
 
@@ -70,6 +74,8 @@ class ReportController extends Controller
     public function update(Report $report,  UpdateReport $request, Update $updateService)
     {
         try {
+            $this->authorize('update', $report);
+
             $updateService->handle($request, $report);
 
 			return (new ReportResource($report))
@@ -93,10 +99,12 @@ class ReportController extends Controller
     public function destroy(Report $report, Destroy $destroyService)
     {
         try {
+            $this->authorize('delete', $report);
+
             $destroyService->handle($report);
 
             return response()->json([
-			    'message' => __('messages.attribute_deleted', ['attribute' => __('attributes.skill')]),
+			    'message' => __('messages.attribute_deleted', ['attribute' => __('attributes.report')]),
             ], 201);
 
         } catch(ExceptionAlias $exception) {

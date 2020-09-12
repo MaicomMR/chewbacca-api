@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('neighborhood');
-            $table->boolean('admin_level');
             $table->timestamps();
         });
     }

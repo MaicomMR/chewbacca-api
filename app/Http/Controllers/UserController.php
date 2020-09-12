@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\User as UserResource;
+use App\Http\Requests\StoreUser;
+use App\Http\Requests\UpdateUser;
+use App\Services\User\Store;
+use App\Services\User\Update;
+use App\Services\User\Destroy;
 use App\User;
 
 class UserController extends Controller
@@ -14,7 +20,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        $this->authorize('viewAny', User::class);
+        return UserResource::collection(User::paginate(config('paginate.DEFAULT_PAGINATE')));
     }
 
     /**
@@ -23,9 +30,25 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUser $request, Store $storeService)
     {
-        //
+        try {
+            $this->authorize('create', User::class);
+
+            $user = $storeService->handle($request);
+
+			return (new UserResource($user))
+					->additional(['data' => [
+                            'message' => __('messages.attribute_created', ['attribute' => __('attributes.user')]),
+						
+                            
+					]]);
+
+        } catch(ExceptionAlias $exception) {
+             return response()->json([
+                 'error' => $exception->getMessage()
+             ], 403);
+        }
     }
 
     /**
@@ -34,9 +57,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        $this->authorize('view', $user);
+        return new UserResource($user);
     }
 
     /**
@@ -46,9 +70,23 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(User $user,  UpdateUser $request, Update $updateService)
     {
-        //
+        try {
+            $this->authorize('update', $user);
+
+            $updateService->handle($request, $user);
+
+			return (new UserResource($user))
+					->additional(['data' => [
+							'message' => __('messages.attribute_updated', ['attribute' => __('attributes.user')]),
+					]]);
+
+        } catch(ExceptionAlias $exception) {
+             return response()->json([
+                 'error' => $exception->getMessage()
+             ], 403);
+        }  
     }
 
     /**
@@ -57,8 +95,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user, Destroy $destroyService)
     {
-        //
+        try {
+            $this->authorize('delete', $user);
+
+            $destroyService->handle($user);
+
+            return response()->json([
+			    'message' => __('messages.attribute_deleted', ['attribute' => __('attributes.user')]),
+            ], 201);
+
+        } catch(ExceptionAlias $exception) {
+             return response()->json([
+                 'error' => $exception->getMessage()
+             ], 403);
+        }
     }
 }

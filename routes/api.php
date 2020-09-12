@@ -22,7 +22,6 @@ use Illuminate\Http\Request;
 
 Route::prefix('auth')->group(function () {
     Route::post('login', 'AuthController@login')->name('users.login');
-    Route::post('register', 'AuthController@register')->name('users.register');
     
     Route::group(['middleware' => ['auth']], function () {
         Route::get('me', 'AuthController@me')->name('users.me');
@@ -31,9 +30,9 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('reports','ReportController');
     Route::resource('violences','ViolenceController');
     Route::resource('users','UserController');
+    Route::resource('reports','ReportController');
 });
 
 

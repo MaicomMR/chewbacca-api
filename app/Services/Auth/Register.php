@@ -13,11 +13,12 @@ class Register
             'email'    => request()->email,
             'password' => request()->password,
             'name' => request()->name,
-            'admin_level' => request()->admin_level,
             'phone' => request()->phone,
             'address' => request()->address,
             'neighborhood' => request()->neighborhood,
         ]);
+
+        $user->assignRole('school');
 
         $token = auth('api')->login($user);
 

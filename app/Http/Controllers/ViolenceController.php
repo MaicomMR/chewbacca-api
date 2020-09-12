@@ -21,6 +21,7 @@ class ViolenceController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Violence::class);
         return ViolenceResource::collection(Violence::paginate(config('paginate.DEFAULT_PAGINATE')));
     }
 
@@ -33,6 +34,8 @@ class ViolenceController extends Controller
     public function store(StoreViolence $request, Store $storeService)
     {
         try {
+            $this->authorize('create', Violence::class);
+
             $violence = $storeService->handle($request);
 
 			return (new ViolenceResource($violence))
@@ -57,6 +60,8 @@ class ViolenceController extends Controller
      */
     public function show(Violence $violence)
     {
+        $this->authorize('view', $violence);
+
         return new ViolenceResource($violence);
     }
 
@@ -70,6 +75,8 @@ class ViolenceController extends Controller
     public function update(Violence $violence,  UpdateViolence $request, Update $updateService)
     {
         try {
+            $this->authorize('update', $violence);
+
             $updateService->handle($request, $violence);
 
 			return (new ViolenceResource($violence))
@@ -93,6 +100,8 @@ class ViolenceController extends Controller
     public function destroy(Violence $violence, Destroy $destroyService)
     {
         try {
+            $this->authorize('delete', $violence);
+
             $destroyService->handle($violence);
 
             return response()->json([
