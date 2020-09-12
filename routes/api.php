@@ -13,10 +13,27 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+
+// Route::post('auth/login', 'AuthController@login');
+
+Route::prefix('auth')->group(function () {
+    Route::post('login', 'AuthController@login')->name('users.login');
+    Route::post('register', 'AuthController@register')->name('users.register');
+    
+    Route::group(['middleware' => ['auth']], function () {
+        Route::get('me', 'AuthController@me')->name('users.me');
+        Route::post('logout', 'AuthController@logout')->name('users.logout');
+    });
 });
 
-Route::resource('reports','ReportController');
-Route::resource('violences','ViolenceController');
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('reports','ReportController');
+    Route::resource('violences','ViolenceController');
+    Route::resource('users','UserController');
+});
+
 
