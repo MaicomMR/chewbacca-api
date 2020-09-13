@@ -21,7 +21,7 @@ class CreateReportsTable extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->string('description');
+            $table->longText('description');
             $table->date('date');
             $table->timestamps();
         });

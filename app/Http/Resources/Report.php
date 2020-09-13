@@ -19,6 +19,7 @@ class Report extends JsonResource
             'description' => $this->description,
             'date' => $this->date,
             'user' => $this->user()->select('users.name')->get(),
+            'violences' => $this->violences()->select('violences.name')->get()
         ];
     }
 }

@@ -36,7 +36,7 @@ class ReportController extends Controller
         try {
             $this->authorize('create', Report::class);
 
-            $report = $storeService->handle($request);
+            $report = $storeService->handle($request, $request->violences);
 
 			return (new ReportResource($report))
 					->additional(['data' => [
