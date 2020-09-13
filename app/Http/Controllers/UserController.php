@@ -21,7 +21,12 @@ class UserController extends Controller
     public function index()
     {
         $this->authorize('viewAny', User::class);
-        return UserResource::collection(User::paginate(config('paginate.DEFAULT_PAGINATE')));
+        $queryFilters = User::neighborhood(request()->neighborhood)
+                            ->name(request()->name);
+
+        return UserResource::collection(
+            $queryFilters->paginate(config('paginate.DEFAULT_PAGINATE'))
+        );
     }
 
     /**
