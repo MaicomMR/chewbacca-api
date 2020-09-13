@@ -21,6 +21,7 @@ class User extends JsonResource
             'phone' => $this->phone,
             'address' => $this->address,
             'neighborhood' => $this->neighborhood,
+            'totalRelatos' => $this->getTotalReports($this->id)
         ];
     }
 }

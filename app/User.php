@@ -60,4 +60,27 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function scopeNeighborhood($query, $neighborhood)
+    {
+        if (!$neighborhood){
+            return $neighborhood;
+        }
+        return $query->where('neighborhood', $neighborhood);
+    }
+
+    public function scopeName($query, $name)
+    {
+        if (!$name){
+            return $query;
+        }
+        return $query->where('name', $name);
+    }
+
+    public function getTotalReports($userId)
+    {
+        return $this->join('reports', 'users.id', '=', 'reports.user_id')
+                    ->where('users.id', $userId)
+                    ->count();
+    }
 }
