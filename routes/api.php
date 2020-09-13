@@ -33,8 +33,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('violences','ViolenceController');
     Route::resource('users','UserController');
     Route::resource('reports','ReportController');
+    Route::get('/records/users/{user}', 'RecordController@getReportsAndViolencesOffUser');
+    Route::get('/records/violences/{violence}', 'RecordController@getUsersByViolence');
+    Route::get('/records/neighborhoods/{user}', 'RecordController@getUsersByNeighborhood');
 });
-
-Route::get('/records/users/{user}', 'RecordController@getReportsAndViolencesOffUser');
-
 
