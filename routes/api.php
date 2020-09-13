@@ -35,4 +35,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('reports','ReportController');
 });
 
+Route::get('/records/users/{user}', 'RecordController@getReportsAndViolencesOffUser');
+
 
