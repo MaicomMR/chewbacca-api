@@ -16,7 +16,7 @@ class RecordViolence
     {
         return response()->json([
             'data' => [
-                'userList' => $this->violence->getViolencesByUser($violence->id)
+                'violenceList' => $this->violence->getViolencesByUser($violence->id)
             ],
         ], 202);
     }

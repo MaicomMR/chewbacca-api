@@ -37,5 +37,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/records/users/{user}', 'RecordController@getReportsAndViolencesOffUser');
     Route::get('/records/violences/{violence}', 'RecordController@getUsersByViolence');
     Route::get('/records/neighborhoods/{user}', 'RecordController@getUsersByNeighborhood');
+    Route::get('/records/reports/{user}', 'RecordController@getAllReportsByUser');
 });
 

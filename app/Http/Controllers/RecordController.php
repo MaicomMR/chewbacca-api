@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\Record\RecordUser;
 use App\Services\Record\RecordViolence;
 use App\Services\Record\RecordNeighborhood;
+use App\Services\Record\RecordReport;
 use App\User;
 use App\Violence;
 
@@ -28,6 +29,13 @@ class RecordController extends Controller
     public function getUsersByNeighborhood(User $user, RecordNeighborhood $recordNeighborhood)
     {
         $response = $recordNeighborhood->sendData($user);
+
+        return $response;
+    }
+
+    public function getAllReportsByUser(User $user, RecordReport $recordReport)
+    {
+        $response = $recordReport->sendData($user);
 
         return $response;
     }
