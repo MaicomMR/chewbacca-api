@@ -22,7 +22,8 @@ class RecordUser
                 'emailUser' => $user->email,
                 'neighborhoodUser' => $user->neighborhood,
                 'totalReports' => $this->user->getTotalReports($user->id),
-                'violenceList' => $this->violence->getViolencesAndNumberOffReports($user->id)
+                'violenceList' => $this->violence->getViolencesAndNumberOffReports($user->id),
+                'dateOffLastReport' =>$this->user->getDateOffLastReport($user->id)
             ],
         ], 202);
     }

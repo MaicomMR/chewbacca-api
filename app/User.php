@@ -122,4 +122,13 @@ class User extends Authenticatable implements JWTSubject
 
          return $users;                   
     }
+
+    public function getDateOffLastReport($userId)
+    {
+        return $this->select('reports.date')
+                    ->join('reports', 'reports.user_id', '=', 'users.id')
+                    ->where('users.id', $userId)
+                    ->orderBy('reports.date', 'DESC')
+                    ->first();
+    }
 }
