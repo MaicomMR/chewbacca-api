@@ -22,7 +22,6 @@ class User extends JsonResource
             'address' => $this->address,
             'neighborhood' => $this->neighborhood,
             'totalReports' => $this->getTotalReports($this->id),
-            'type' => $request->user->getRoleNames()->first(),
         ];
     }
 }

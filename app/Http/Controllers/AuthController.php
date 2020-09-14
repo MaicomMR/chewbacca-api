@@ -33,7 +33,8 @@ class AuthController extends Controller
     {
         return response()->json([
             'user' => auth('api')->user(),
-            'totalReports' => auth('api')->user()->getTotalReports(auth()->user()->id)
+            'totalReports' => auth('api')->user()->getTotalReports(auth()->user()->id),
+            'type' => auth('api')->user()->roles->pluck('name')->first(),
         ]);
     }
 
