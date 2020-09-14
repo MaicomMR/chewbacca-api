@@ -977,7 +977,7 @@ class UserSeeder extends Seeder
         $user->assignRole('school');
 
         $user = User::create([
-            'name' => 'Paulo Freire',
+            'name' => 'EMEI Paulo Freire',
             'phone' => ('53981115566'),
             'email' => 'paulof@gmail.com',
             'password' => Hash::make('password'),

@@ -88,5 +88,34 @@ class ViolenceSeeder extends Seeder
             'media_link' => 'https://www.youtube.com/watch?v=eF0-IuocqXE',
             'description' => 'A violência verbal é um comportamento agressivo, caracterizado por palavras danosas, que têm a intenção de ridicularizar, humilhar, manipular e/ou ameaçar. Assim como acontece com a violência física, este tipo de agressão afeta significativamente a vítima, causando danos psicológicos brutais e irreparáveis. A violência verbal anda lado a lado com a violência psicológica, já que a segunda é uma consequência da primeira.',
         ]);
+
+        DB::table('violences')->insert([
+            'name' => 'Depredação',
+            'slug' => Str::slug('Depredação'),
+            'media_link' => 'https://www.youtube.com/watch?v=OzsfOLBmbkU',
+            'description' => 'Ato de teor destrutivo; dano causado à propriedade alheia e/ou escolar; devastação.
+            Supressão, contrária à lei, de propriedades, bens materiais, roubo, furto: a depredação dos bens públicos.',
+        ]);
+
+        DB::table('violences')->insert([
+            'name' => 'Violência sexual',
+            'slug' => Str::slug('Violência sexual'),
+            'media_link' => 'https://www.youtube.com/watch?v=RudqxA2G_3Q',
+            'description' => 'Violência sexual é qualquer ato sexual ou tentativa de obtenção de ato sexual por violência ou coerção, comentários ou investidas sexuais indesejados, atividades como o tráfico humano ou diretamente contra a sexualidade de uma pessoa, independentemente da relação com a vítima.',
+        ]);
+
+        DB::table('violences')->insert([
+            'name' => 'Violência aluno/aluno',
+            'slug' => Str::slug('Violência aluno/aluno'),
+            'media_link' => 'https://www.youtube.com/watch?v=I0E3T899yJs',
+            'description' => 'Ocorrências envolvendo dois ou mais alunos.',
+        ]);
+
+        DB::table('violences')->insert([
+            'name' => 'Violência aluno/professor',
+            'slug' => Str::slug('Violência aluno/professor'),
+            'media_link' => 'https://www.youtube.com/watch?v=I0E3T899yJs',
+            'description' => 'Ocorrência Envolvendo aluno e professor/funcionário da escola.',
+        ]);
     }
 }
