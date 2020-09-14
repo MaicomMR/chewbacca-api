@@ -40,9 +40,7 @@ class ReportController extends Controller
 
 			return (new ReportResource($report))
 					->additional(['data' => [
-                            'message' => __('messages.attribute_created', ['attribute' => __('attributes.report')]),
-						
-                            
+                            'message' => __('messages.attribute_created', ['attribute' => __('attributes.report')]),      
 					]]);
 
         } catch(ExceptionAlias $exception) {

@@ -40,3 +40,4 @@ class RecordController extends Controller
         return $response;
     }
 }
+
