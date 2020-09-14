@@ -24,6 +24,7 @@ class SendData
                 'userWithMoreReports' => $this->user->userWithMoreReports(),
                 'neighborhoodWithMoreReports' => $this->user->neighborhoodWithMoreReports(),
                 'violenceMoreRelated' => $this->violence->violenceMoreRelated(),
+                'top5UsersWithMoreReports' => $this->user->top5UsersWithMoreReports(),
             ],
         ], 202);
     }

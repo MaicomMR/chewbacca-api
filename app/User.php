@@ -103,11 +103,23 @@ class User extends Authenticatable implements JWTSubject
     public function neighborhoodWithMoreReports()
     {
         $neighborhood = DB::select("SELECT users.neighborhood, COUNT(reports.id) as total
-                                FROM users
-                                JOIN reports ON users.id = reports.user_id
-                                GROUP BY users.neighborhood
-                                ORDER BY total DESC LIMIT 1");
+                                    FROM users
+                                    JOIN reports ON users.id = reports.user_id
+                                    GROUP BY users.neighborhood
+                                    ORDER BY total DESC LIMIT 1");
         
         return $neighborhood;
+    }
+
+    public function top5UsersWithMoreReports()
+    {
+        $users = DB::select("SELECT users.name, users.neighborhood, COUNT(reports.id) as reports
+                            FROM reports 
+                            JOIN report_violence ON report_violence.report_id = reports.id
+                            JOIN users ON reports.user_id = users.id
+                            GROUP BY users.name, users.neighborhood
+                            ORDER BY reports DESC LIMIT 5");
+
+         return $users;                   
     }
 }
