@@ -18,6 +18,7 @@ class RecordNeighborhood
     {
         return response()->json([
             'data' => [
+                'neighborhood' => $user->neighborhood,
                 'userList' => $this->violence->getUsersByNeighborhood($user->neighborhood)
             ],
         ], 202);
