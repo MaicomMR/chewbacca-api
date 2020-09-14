@@ -28,7 +28,8 @@ class Violence extends Model
                             JOIN report_violence ON report_violence.violence_id = violences.id
                             JOIN reports ON report_violence.report_id = reports.id
                             WHERE reports.user_id=$userId
-                            GROUP BY violences.name, reports.user_id");
+                            GROUP BY violences.name, reports.user_id
+                            ORDER BY total DESC");
 
         return $reports;
     }
