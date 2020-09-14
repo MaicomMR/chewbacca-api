@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\DB;
 
 
 class User extends Authenticatable implements JWTSubject
@@ -87,5 +88,26 @@ class User extends Authenticatable implements JWTSubject
         return $this->join('reports', 'users.id', '=', 'reports.user_id')
                     ->where('users.id', $userId)
                     ->count();
+    }
+
+    public function userWithMoreReports()
+    {
+        $user = DB::select("SELECT users.name
+                            FROM users
+                            JOIN reports ON users.id = reports.user_id
+                            GROUP BY users.name ASC LIMIT 1");
+              
+        return $user;                    
+    }
+
+    public function neighborhoodWithMoreReports()
+    {
+        $neighborhood = DB::select("SELECT users.neighborhood, COUNT(reports.id) as total
+                                FROM users
+                                JOIN reports ON users.id = reports.user_id
+                                GROUP BY users.neighborhood
+                                ORDER BY total DESC LIMIT 1");
+        
+        return $neighborhood;
     }
 }

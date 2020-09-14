@@ -48,4 +48,9 @@ class Report extends Model
         return $reports;
     }
 
+    public function numberAllReports() 
+    {
+        return $this->count('id');
+    }
+
 }
