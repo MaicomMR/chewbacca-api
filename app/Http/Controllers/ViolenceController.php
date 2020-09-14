@@ -25,6 +25,12 @@ class ViolenceController extends Controller
         return ViolenceResource::collection(Violence::paginate(config('paginate.DEFAULT_PAGINATE')));
     }
 
+    public function all()
+    {
+        $this->authorize('viewAny', Violence::class);
+        return ViolenceResource::collection(Violence::all());
+    }
+
     /**
      * Store a newly created resource in storage.
      *

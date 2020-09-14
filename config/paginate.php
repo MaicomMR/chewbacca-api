@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'DEFAULT_PAGINATE' => 100
+    'DEFAULT_PAGINATE' => 10
 ];

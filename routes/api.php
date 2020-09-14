@@ -30,6 +30,7 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/violences/all', 'ViolenceController@all');
     Route::resource('violences','ViolenceController');
     Route::resource('users','UserController');
     Route::resource('reports','ReportController');
